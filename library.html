@@ -49,24 +49,24 @@ pre {
 
 <h2>Matplotlib</h2>
 
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." title="Type in a search query">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." title="Type in a search query" autofocus>
 
 <ul id="myUL">
   <li>
     <table><tr><td>
     <b>Error-bar plot</b>
     <pre class="prettyprint lang-py">
-      import numpy as np
-      import matplotlib.pyplot as plt
-      N = 50
-      x = np.arange(N)
-      y = np.random.rand(N)
-      e = 0.1*np.random.rand(N)
-      plt.errorbar(x,y,yerr=e)
-      plt.xlabel("Some x label [m]")
-      plt.ylabel("A fancy y label [kg]")
-      plt.title("A 1D line plot")
-      plt.show()</pre>
+import numpy as np
+import matplotlib.pyplot as plt
+N = 50
+x = np.arange(N)
+y = np.random.rand(N)
+e = 0.1*np.random.rand(N)
+plt.errorbar(x,y,yerr=e)
+plt.xlabel("Some x label [m]")
+plt.ylabel("A fancy y label [kg]")
+plt.title("A 1D line plot")
+plt.show()</pre>
     </td><td><img src="images/demo0001.png" /></td></tr></table>
   </li>
 
@@ -74,18 +74,18 @@ pre {
     <table><tr><td>
     <b>1D histogram plot</b>
     <pre class="prettyprint lang-py">
-      import numpy as np
-      import matplotlib.pyplot as plt
-      N = 50
-      x = np.arange(N+1)
-      y = np.random.rand(N)
-      e = 0.1*np.random.rand(N)
-      plt.bar(0.5*(x[:-1] + x[1:]), y,
-          width=np.ediff1d(x),yerr=e)
-      plt.xlabel("Some x label [m]")
-      plt.ylabel("A fancy y label [kg]")
-      plt.title("A 1D histogram plot")
-      plt.show()</pre>
+import numpy as np
+import matplotlib.pyplot as plt
+N = 50
+x = np.arange(N+1)
+y = np.random.rand(N)
+e = 0.1*np.random.rand(N)
+plt.bar(0.5*(x[:-1] + x[1:]), y,
+    width=np.ediff1d(x),yerr=e)
+plt.xlabel("Some x label [m]")
+plt.ylabel("A fancy y label [kg]")
+plt.title("A 1D histogram plot")
+plt.show()</pre>
     </td><td><img src="images/demo0002.png" /></td></tr></table>
   </li>
 
@@ -93,22 +93,22 @@ pre {
     <table><tr><td>
     <b>2D image</b>
     <pre class="prettyprint lang-py">
-      import numpy as np
-      import matplotlib.pyplot as plt
-      N = 100
-      M = 50
-      x = np.arange(N+1)
-      y = np.arange(M+1)
-      z = np.random.rand(M, N).astype(np.float64)
-      im = plt.imshow(z, origin="lower",
-          extent=[x[0], x[-1], y[0], y[-1]], aspect="auto",
-          cmap="viridis")
-      cb = plt.colorbar(im)
-      cb.ax.set_ylabel("Counts")
-      plt.xlabel("x coordinate")
-      plt.ylabel("y coordinate")
-      plt.title("A 2D image")
-      plt.show()</pre>
+import numpy as np
+import matplotlib.pyplot as plt
+N = 100
+M = 50
+x = np.arange(N+1)
+y = np.arange(M+1)
+z = np.random.rand(M, N).astype(np.float64)
+im = plt.imshow(z, origin="lower",
+    extent=[x[0], x[-1], y[0], y[-1]], aspect="auto",
+    cmap="viridis")
+cb = plt.colorbar(im)
+cb.ax.set_ylabel("Counts")
+plt.xlabel("x coordinate")
+plt.ylabel("y coordinate")
+plt.title("A 2D image")
+plt.show()</pre>
     </td><td><img src="images/demo0003.png" /></td></tr></table>
   </li>
 
@@ -116,24 +116,24 @@ pre {
     <table><tr><td>
     <b>2D filled contours</b>
     <pre class="prettyprint lang-py">
-      import numpy as np
-      import matplotlib.pyplot as plt
-      N = 100
-      M = 50
-      xx = np.arange(N, dtype=np.float64)
-      yy = np.arange(M, dtype=np.float64)
-      x, y = np.meshgrid(xx, yy)
-      b = N/20.0
-      c = M/2.0
-      r = np.sqrt(((x-c)/b)**2 + ((y-c)/b)**2)
-      z = np.sin(r)
-      contf = plt.contourf(x, y, z, cmap="viridis")
-      cb = plt.colorbar(contf)
-      cb.ax.set_ylabel("Counts")
-      plt.xlabel("x coordinate")
-      plt.ylabel("y coordinate")
-      plt.title("2D filled contours")
-      plt.show()</pre>
+import numpy as np
+import matplotlib.pyplot as plt
+N = 100
+M = 50
+xx = np.arange(N, dtype=np.float64)
+yy = np.arange(M, dtype=np.float64)
+x, y = np.meshgrid(xx, yy)
+b = N/20.0
+c = M/2.0
+r = np.sqrt(((x-c)/b)**2 + ((y-c)/b)**2)
+z = np.sin(r)
+contf = plt.contourf(x, y, z, cmap="viridis")
+cb = plt.colorbar(contf)
+cb.ax.set_ylabel("Counts")
+plt.xlabel("x coordinate")
+plt.ylabel("y coordinate")
+plt.title("2D filled contours")
+plt.show()</pre>
     </td><td><img src="images/demo0004.png" /></td></tr></table>
   </li>
 
@@ -141,20 +141,20 @@ pre {
     <table><tr><td>
     <b>2D image non-uniform pixels</b>
     <pre class="prettyprint lang-py">
-      import numpy as np
-      import matplotlib.pyplot as plt
-      N = 10
-      M = 5
-      x = np.arange(N+1)**2
-      y = np.arange(M+1)
-      z = np.random.rand(M, N).astype(np.float64)
-      pcmesh = plt.pcolormesh(x, y, z, cmap="viridis")
-      cb = plt.colorbar(pcmesh)
-      cb.ax.set_ylabel("Counts")
-      plt.xlabel("x coordinate")
-      plt.ylabel("y coordinate")
-      plt.title("A 2D image with non-equal sized pixels")
-      plt.show()</pre>
+import numpy as np
+import matplotlib.pyplot as plt
+N = 10
+M = 5
+x = np.arange(N+1)**2
+y = np.arange(M+1)
+z = np.random.rand(M, N).astype(np.float64)
+pcmesh = plt.pcolormesh(x, y, z, cmap="viridis")
+cb = plt.colorbar(pcmesh)
+cb.ax.set_ylabel("Counts")
+plt.xlabel("x coordinate")
+plt.ylabel("y coordinate")
+plt.title("A 2D image with non-equal sized pixels")
+plt.show()</pre>
     </td><td><img src="images/demo0005.png" /></td></tr></table>
   </li>
 
@@ -162,40 +162,44 @@ pre {
     <table><tr><td>
     <b>2D scatter</b>
     <pre class="prettyprint lang-py">
-      import numpy as np
-      import matplotlib.pyplot as plt
-      N = 100
-      x = np.random.rand(N).astype(np.float64)
-      y = np.random.rand(N).astype(np.float64)
-      z = np.random.rand(N).astype(np.float64)
-      s = 300.0*np.random.rand(N).astype(np.float64)
-      scat = plt.scatter(x, y, c=z, cmap="jet", s=s)
-      cb = plt.colorbar(scat)
-      cb.ax.set_ylabel("Counts")
-      plt.xlabel("x coordinate")
-      plt.ylabel("y coordinate")
-      plt.title("A 2D scatter plot")
-      plt.show()</pre>
+import numpy as np
+import matplotlib.pyplot as plt
+N = 100
+x = np.random.rand(N).astype(np.float64)
+y = np.random.rand(N).astype(np.float64)
+z = np.random.rand(N).astype(np.float64)
+s = 300.0*np.random.rand(N).astype(np.float64)
+scat = plt.scatter(x, y, c=z, cmap="jet", s=s)
+cb = plt.colorbar(scat)
+cb.ax.set_ylabel("Counts")
+plt.xlabel("x coordinate")
+plt.ylabel("y coordinate")
+plt.title("A 2D scatter plot")
+plt.show()</pre>
     </td><td><img src="images/demo0006.png" /></td></tr></table>
   </li>
 
   <li>
     <table><tr><td>
-    <b>2D image</b>
+    <b>Grid on axes</b>
     <pre class="prettyprint lang-py">
-      import numpy as np
-      import matplotlib.pyplot as plt
-    </pre>
+import matplotlib.pyplot as plt
+fig = plt.figure()
+ax1 = fig.add_subplot(111)
+ax1.grid(True, color='gray', linestyle="dotted")
+ax1.set_axisbelow(True)
+plt.show()</pre>
     </td><td><img src="images/demo0007.png" /></td></tr></table>
   </li>
 
   <li>
     <table><tr><td>
-    <b>2D image</b>
+    <b>Set figure size and aspect ratio</b>
     <pre class="prettyprint lang-py">
-      import numpy as np
-      import matplotlib.pyplot as plt
-    </pre>
+import matplotlib.pyplot as plt
+fig = plt.figure(figsize=(10, 4))
+ax1 = fig.add_subplot(111)
+plt.show()</pre>
     </td><td><img src="images/demo0008.png" /></td></tr></table>
   </li>
 
