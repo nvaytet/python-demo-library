@@ -42,6 +42,20 @@ pre {
   background-color: white;
 }
 
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  /*text-decoration: none;*/
+  /*display: inline-block;*/
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
 /*#myUL li a:hover:not(.header) {
   background-color: #eee;
 }*/
@@ -49,11 +63,67 @@ pre {
 </head>
 <body>
 
-<h2>Matplotlib</h2>
+<script>
+
+    var activeList = "list:matplotlib";
+
+    function myFunction(evt, input) {
+        var code = evt.charCode || evt.keyCode;
+        if (code == 27) {
+            input.value = '';
+        }
+        var ignores = ["plt.show()", "import numpy as np", "import matplotlib.pyplot as plt"];
+        var filter, ul, li, a, i, txtValue;
+        // input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            // a = li[i].getElementsByTagName("a")[0];
+            txtValue = li[i].textContent || li[i].innerText;
+            for (j in ignores) {
+                txtValue = txtValue.replace(ignores[j], "");
+            }
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+                // li[i].innerHTML = li[i].innerHTML.replace(filter, "<span style=\"color:red;\""+filter+"</span>");
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+
+
+    function toggleButton(origin) {
+        var theDiv = document.getElementById("div:buttons");
+        var butns = theDiv.getElementsByTagName("button");
+        for (i = 0; i < butns.length; i++) {
+            if (butns[i].id == origin) {
+                butns[i].style = "background-color:#4CAF50; color:#FFFFFF;";
+            } else {
+                butns[i].style = "background-color:#C0C0C0; color:#000000;";
+            }
+        }
+    }
+
+</script>
+
+
+
+
+<div id="div:buttons">
+
+<button id="button:matplotlib" class="button" onclick="toggleButton('button:matplotlib')">Matplotlib</button>
+
+<button id="button:numpy" class="button" onclick="toggleButton('button:numpy')">Numpy</button>
+
+</div>
 
 <input type="text" id="myInput" onkeyup="myFunction(event, this)" placeholder="Search..." title="Type in a search query" autofocus>
 
-<ul id="myUL">
+
+
+<ul id="list:matplotlib">
   <li>
     <table><tr><td>
     <b>Error-bar plot</b>
@@ -245,33 +315,40 @@ plt.show()</pre>
 
 </ul>
 
-<script>
-function myFunction(evt, input) {
-    var code = evt.charCode || evt.keyCode;
-    if (code == 27) {
-        input.value = '';
-    }
-    var ignores = ["plt.show()", "import numpy as np", "import matplotlib.pyplot as plt"];
-    var filter, ul, li, a, i, txtValue;
-    // input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        // a = li[i].getElementsByTagName("a")[0];
-        txtValue = li[i].textContent || li[i].innerText;
-        for (j in ignores) {
-            txtValue = txtValue.replace(ignores[j], "");
-        }
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-            // li[i].innerHTML = li[i].innerHTML.replace(filter, "<span style=\"color:red;\""+filter+"</span>");
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-</script>
+
+<!-- <ul id="list:numpy">
+  <li>
+    <table><tr><td>
+    <b>Array of random numbers</b>
+    <pre class="prettyprint lang-py">
+import numpy as np
+import matplotlib.pyplot as plt
+N = 50
+y = np.random.rand(N)</pre>
+    </td><td></td></tr></table>
+  </li>
+
+  <li>
+    <table><tr><td>
+    <b>1D histogram plot</b>
+    <pre class="prettyprint lang-py">
+import numpy as np
+import matplotlib.pyplot as plt
+N = 50
+x = np.arange(N+1)
+y = np.random.rand(N)
+e = 0.1*np.random.rand(N)
+plt.bar(0.5*(x[:-1] + x[1:]), y,
+    width=np.ediff1d(x),yerr=e)
+plt.xlabel("Some x label [m]")
+plt.ylabel("A fancy y label [kg]")
+plt.title("A 1D histogram plot")
+plt.show()</pre>
+    </td><td><img src="images/demo0002.png" /></td></tr></table>
+  </li>
+</ul> -->
+
+<script>toggleButton("button:matplotlib");</script>
 
 </body>
 </html>
